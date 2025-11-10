@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Başlangıç Fitness Programı - Premium Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark: #1a1a2e;
+            --light: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f5576c;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--gray-800);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.98), rgba(31, 41, 55, 0.98));
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            z-index: 0;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2em;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-gradient);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: var(--dark);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--gray-600);
+            font-size: 0.95em;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--gray-200);
+        }
+
+        .section-title {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 40px;
+            background: var(--primary-gradient);
+            border-radius: 3px;
+        }
+
+        .section-subtitle {
+            color: var(--gray-600);
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 100%);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--gray-200);
+        }
+
+        .intro-box h3 {
+            color: var(--primary);
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .intro-box p {
+            color: var(--gray-700);
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .intro-box ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 15px;
+        }
+
+        .intro-box li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--gray-700);
+        }
+
+        .intro-box li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .exercise-card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exercise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .exercise-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary);
+        }
+
+        .exercise-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #e0e7ff, #f3f4f6);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .exercise-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .exercise-number {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 36px;
+            height: 36px;
+            background: rgba(102, 126, 234, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .exercise-name {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .exercise-target {
+            display: inline-block;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .exercise-details {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .detail-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            background: var(--gray-50);
+            border-radius: 8px;
+        }
+
+        .detail-label {
+            font-size: 0.75em;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .exercise-notes {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .exercise-notes p {
+            font-size: 0.9em;
+            color: var(--gray-700);
+            line-height: 1.6;
+        }
+
+        .tips-section {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe8e8 100%);
+            border-radius: 20px;
+            padding: 35px;
+            margin-top: 30px;
+            border: 1px solid rgba(245, 87, 108, 0.2);
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tip-card {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .tip-card h4 {
+            color: var(--accent);
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .tip-card p {
+            color: var(--gray-700);
+            line-height: 1.7;
+            font-size: 0.95em;
+        }
+
+        .results-section {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 20px;
+            padding: 35px;
+            margin-top: 30px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .results-timeline {
+            display: grid;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .timeline-marker {
+            min-width: 50px;
+            height: 50px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1em;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .timeline-content h4 {
+            color: var(--success);
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .timeline-content p {
+            color: var(--gray-700);
+            line-height: 1.7;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            .exercise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Başlangıç Fitness Programı</h1>
+            <p>Premium Home Gym Antrenman Planı</p>
+        </div>
+
+        <div class="stats-dashboard">
+            <div class="stat-card">
+                <div class="stat-icon">⏱</div>
+                <div class="stat-value">45-60</div>
+                <div class="stat-label">Dakika / Antrenman</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📅</div>
+                <div class="stat-value">3-4</div>
+                <div class="stat-label">Gün / Hafta</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-value">12</div>
+                <div class="stat-label">Haftalık Program</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💪</div>
+                <div class="stat-value">10</div>
+                <div class="stat-label">Temel Hareket</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Program Hakkında</h2>
+            <div class="intro-box">
+                <h3>Başlangıç Seviyesi İçin Tasarlandı</h3>
+                <p>Bu program, uzun süredir spor yapmamış bireyler için özel olarak hazırlanmıştır. Altis HG-200 Plus home gym istasyonu ve dumbell seti ile evde güvenli ve etkili bir şekilde çalışmanızı sağlar.</p>
+
+                <h3 style="margin-top: 25px;">Program Özellikleri</h3>
+                <ul>
+                    <li>Bar gerektirmeyen, sadece dumbell ve kablolu makine hareketleri</li>
+                    <li>Bütüncül yaklaşım - tüm vücut kasları her antrenmanda çalışır</li>
+                    <li>Başlangıç dostu set ve tekrar sayıları</li>
+                    <li>Temel kuvvet geliştirme ve kas hafızası oluşturma</li>
+                    <li>Düşük yaralanma riski, yüksek sonuç</li>
+                </ul>
+
+                <h3 style="margin-top: 25px;">Nasıl Çalışır?</h3>
+                <p><strong>Haftalık Düzen:</strong> Haftada 3-4 gün, aşağıdaki 10 hareketi her antrenmanda yapın. Günlere ayırmadan bütüncül bir yaklaşım ile tüm vücudu çalıştırıyorsunuz.</p>
+                <p><strong>İlerleme:</strong> İlk 4 hafta tekniğe odaklanın ve hafif ağırlıklar kullanın. 5-8. haftalarda ağırlıkları kademeli olarak artırın. 9-12. haftalarda ise daha zorlayıcı ağırlıklarla kaslarınızı geliştirin.</p>
+                <p><strong>Dinlenme:</strong> Hareketler arası 60-90 saniye, setler arası 2-3 dakika dinlenin. Antrenmanlar arası en az 1 gün dinlenme bırakın.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Antrenman Programı</h2>
+            <p class="section-subtitle">Her antrenmanda bu 10 hareketi sırasıyla yapın</p>
+
+            <div class="exercise-grid">
+                <!-- Egzersiz 1: Lat Pulldown -->
+                <div class="exercise-card">
+                    <div class="exercise-image">
+                        <div class="exercise-number">1</div>
+                        <img src="Lat Pulldown.png" alt="Lat Pulldown">
+                    </div>
+                    <div class="exercise-name">Lat Pulldown</div>
+                    <span class="exercise-target">Sırt Kasları</span>
+                    <div class="exercise-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Set</div>
+                            <div class="detail-value">3</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tekrar</div>
+                            <div class="detail-value">12-15</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Dinlenme</div>
+                            <div class="detail-value">90 sn</div>
+                        </div>
+                    </div>
+                    <div class="exercise-notes">
+                        <p><strong>Nasıl Yapılır:</strong> Kablo makinesinde üst makarayı kullanın. Kollarınızı tam uzatın, sonra dirseklerinizi aşağı ve geriye çekerek barı göğsünüze doğru indirin. Sırt kaslarınızı sıkarak kontrollü hareket edin.</p>
+                    </div>
+                </div>
+
+                <!-- Egzersiz 2: Cable Chest Press -->
+                <div class="exercise-card">
+                    <div class="exercise-image">
+                        <div class="exercise-number">2</div>
+                        <img src="Chest Press.png" alt="Cable Chest Press">
+                    </div>
+                    <div class="exercise-name">Cable Chest Press</div>
+                    <span class="exercise-target">Göğüs Kasları</span>
+                    <div class="exercise-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Set</div>
+                            <div class="detail-value">3</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tekrar</div>
+                            <div class="detail-value">10-12</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Dinlenme</div>
+                            <div class="detail-value">90 sn</div>
+                        </div>
+                    </div>
+                    <div class="exercise-notes">
+                        <p><strong>Nasıl Yapılır:</strong> Kablo makinesinde omuz hizasına ayarlayın. Ayakta dengeli durun, kabloları öne doğru iterek göğsünüzü çalıştırın. Kollarınızı tamamen uzatın ve kontrollü geri getirin.</p>
+                    </div>
+                </div>
+
+                <!-- Egzersiz 3: Leg Extension -->
+                <div class="exercise-card">
+                    <div class="exercise-image">
+                        <div class="exercise-number">3</div>
+                        <img src="Leg Extensions.png" alt="Leg Extension">
+                    </div>
+                    <div class="exercise-name">Leg Extension</div>
+                    <span class="exercise-target">Ön Bacak (Quadriceps)</span>
+                    <div class="exercise-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Set</div>
+                            <div class="detail-value">3</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tekrar</div>
+                            <div class="detail-value">12-15</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Dinlenme</div>
+                            <div class="detail-value">60 sn</div>
+                        </div>
+                    </div>
+                    <div class="exercise-notes">
+                        <p><strong>Nasıl Yapılır:</strong> Makinede oturun, dizlerinizi makine ekseniyle aynı hizada tutun. Bacaklarınızı tamamen uzatın, yukarıda 1 saniye tutun ve yavaşça indirin. Dizlerinizi kilitlemeyin.</p>
+                    </div>
+                </div>
+
+                <!-- Egzersiz 4: Leg Curl -->
+                <div class="exercise-card">
+                    <div class="exercise-image">
+                        <div class="exercise-number">4</div>
+                        <img src="Leg Curl.png" alt="Leg Curl">
+                    </div>
+                    <div class="exercise-name">Leg Curl</div>
+                    <span class="exercise-target">Arka Bacak (Hamstring)</span>
+                    <div class="exercise-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Set</div>
+                            <div class="detail-value">3</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tekrar</div>
+                            <div class="detail-value">12-15</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Dinlenme</div>
+                            <div class="detail-value">60 sn</div>
+                        </div>
+                    </div>
+                    <div class="exercise-notes">
+                        <p><strong>Nasıl Yapılır:</strong> Yüzüstü uzanın, topuklarınızı kalçanıza doğru kıvırın. Arka bacak kaslarınızı sıkarak yukarı kaldırın ve yavaşça indirin. Kalçalarınızı yerden kaldırmayın.</p>
+                    </div>
+                </div>
+
+                <!-- Egzersiz 5: Dumbbell Shoulder Press -->
+                <div class="exercise-card">
+                    <div class="exercise-image">
+                        <div class="exercise-number">5</div>
+                        <img src="Dumbell Shoulder Press.png" alt="Dumbbell Shoulder Press">
+                    </div>
+                    <div class="exercise-name">Dumbbell Shoulder Press (Oturarak)</div>
+                    <span class="exercise-target">Omuz Kasları</span>
+                    <div class="exercise-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Set</div>
+                            <div class="detail-value">3</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tekrar</div>
+                            <div class="detail-value">10-12</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Dinlenme</div>
+                            <div class="detail-value">90 sn</div>
+                        </div>
+                    </div>
+                    <div class="exercise-notes">
+                        <p><strong>Nasıl Yapılır:</strong> Dik bir bankta oturun, dumbellları omuz hizasında tutun. Yukarı doğru itin, üstte hafifçe birbirine yaklaştırın. Yavaşça omuz hizasına geri getirin.</p>
+                    </div>
+                </div>
+
+                <!-- Egzersiz 6: Triceps Pushdown -->
+                <div class="exercise-card">
+                    <div class="exercise-image">
+                        <div class="exercise-number">6</div>
+                        <img src="Triceps pushdown.png" alt="Triceps Pushdown">
+                    </div>
+                    <div class="exercise-name">Triceps Pushdown</div>
+                    <span class="exercise-target">Triceps (Kol Arkası)</span>
+                    <div class="exercise-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Set</div>
+                            <div class="detail-value">3</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tekrar</div>
+                            <div class="detail-value">12-15</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Dinlenme</div>
+                            <div class="detail-value">60 sn</div>
+                        </div>
+                    </div>
+                    <div class="exercise-notes">
+                        <p><strong>Nasıl Yapılır:</strong> Üst makarada rope veya bar kullanın. Dirseklerinizi vücudunuza sabit tutarak aşağı itin, kollarınızı tam uzatın. Dirseklerinizi hareket ettirmeyin.</p>
+                    </div>
+                </div>
+
+                <!-- Egzersiz 7: Dumbbell Bicep Curl -->
+                <div class="exercise-card">
+                    <div class="exercise-image">
+                        <div class="exercise-number">7</div>
+                        <img src="Dumbell Bicep Curl.png" alt="Dumbbell Bicep Curl">
+                    </div>
+                    <div class="exercise-name">Dumbbell Bicep Curl</div>
+                    <span class="exercise-target">Biceps (Kol Önü)</span>
+                    <div class="exercise-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Set</div>
+                            <div class="detail-value">3</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tekrar</div>
+                            <div class="detail-value">12-15</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Dinlenme</div>
+                            <div class="detail-value">60 sn</div>
+                        </div>
+                    </div>
+                    <div class="exercise-notes">
+                        <p><strong>Nasıl Yapılır:</strong> Ayakta, kollarınız yanınızda. Dumbellları yukarı kıvırırken avuç içlerinizi tavana çevirin. Üstte bicepsinizi sıkın, yavaşça indirin. Vücudunuzu sallamayın.</p>
+                    </div>
+                </div>
+
+                <!-- Egzersiz 8: Goblet Squat -->
+                <div class="exercise-card">
+                    <div class="exercise-image">
+                        <div class="exercise-number">8</div>
+                        <img src="Dumbbell Goblet Squat.png" alt="Dumbbell Goblet Squat">
+                    </div>
+                    <div class="exercise-name">Dumbbell Goblet Squat</div>
+                    <span class="exercise-target">Bacak & Kalça</span>
+                    <div class="exercise-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Set</div>
+                            <div class="detail-value">3</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tekrar</div>
+                            <div class="detail-value">12-15</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Dinlenme</div>
+                            <div class="detail-value">90 sn</div>
+                        </div>
+                    </div>
+                    <div class="exercise-notes">
+                        <p><strong>Nasıl Yapılır:</strong> Tek dumbell'ı göğsünüze yakın tutun. Ayaklarınızı omuz genişliğinde açın, çömelirken kalçanızı arkaya itin. Dizleriniz ayak parmaklarınızı geçmemeli. Topuklardan itip kalkın.</p>
+                    </div>
+                </div>
+
+                <!-- Egzersiz 9: Bent Over Dumbbell Row -->
+                <div class="exercise-card">
+                    <div class="exercise-image">
+                        <div class="exercise-number">9</div>
+                        <img src="Bent over Dumbbell Row.png" alt="Bent Over Dumbbell Row">
+                    </div>
+                    <div class="exercise-name">Bent Over Dumbbell Row</div>
+                    <span class="exercise-target">Orta Sırt</span>
+                    <div class="exercise-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Set</div>
+                            <div class="detail-value">3</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tekrar</div>
+                            <div class="detail-value">12-15</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Dinlenme</div>
+                            <div class="detail-value">90 sn</div>
+                        </div>
+                    </div>
+                    <div class="exercise-notes">
+                        <p><strong>Nasıl Yapılır:</strong> Öne eğilin (45 derece), dumbbellları aşağıda tutun. Dirseklerinizi geriye çekerek sırt kaslarınızı sıkın. Üstte kürek kemiklerinizi birbirine yaklaştırın. Sırtınızı düz tutun.</p>
+                    </div>
+                </div>
+
+                <!-- Egzersiz 10: Plank -->
+                <div class="exercise-card">
+                    <div class="exercise-image">
+                        <div class="exercise-number">10</div>
+                        <img src="Plank ( Karın Köprüsü).png" alt="Plank">
+                    </div>
+                    <div class="exercise-name">Plank (Karın Köprüsü)</div>
+                    <span class="exercise-target">Core (Karın)</span>
+                    <div class="exercise-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Set</div>
+                            <div class="detail-value">3</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Süre</div>
+                            <div class="detail-value">30-60 sn</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Dinlenme</div>
+                            <div class="detail-value">60 sn</div>
+                        </div>
+                    </div>
+                    <div class="exercise-notes">
+                        <p><strong>Nasıl Yapılır:</strong> Dirsekler üzerinde, vücut düz bir çizgide. Karın kaslarınızı sıkın, kalçanızı sarkıtmayın veya havaya kaldırmayın. Boyun düz, bakış yerde. İlk haftalarda 20-30 saniye yeterli.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h2 class="section-title">Önemli İpuçları</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>Isınma Zorunludur</h4>
+                    <p>Her antrenmana 5-10 dakika hafif kardiyo ve eklem hareketleri ile başlayın. Soğuk kaslarla çalışmak yaralanma riskini artırır.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Teknik Her Şeyden Önemli</h4>
+                    <p>İlk 4 hafta ağırlık değil, doğru form önemlidir. Hareketi öğrenin, kas hissini yakalayın. Sonra ağırlığı artırın.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Ağırlık Artışı</h4>
+                    <p>Bir hareketi rahatça 15 tekrar yapabiliyorsanız, bir sonraki antrenmanda ağırlığı %5-10 artırın. Yavaş ilerleme güvenli ilerlemedir.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Dinlenme Günleri</h4>
+                    <p>Kaslar dinlenirken büyür. Antrenmanlar arası en az 1 gün ara verin. Örnek: Pazartesi, Çarşamba, Cuma veya Salı, Perşembe, Cumartesi.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Protein ve Beslenme</h4>
+                    <p>Kas gelişimi için günde vücut ağırlığınız kadar (kg başına 1.6-2g) protein tüketin. Bol su için (günde 2-3 litre).</p>
+                </div>
+                <div class="tip-card">
+                    <h4>Ağrı vs Acı</h4>
+                    <p>Kas yanması normaldir. Keskin, eklem ağrısı ise durdurma sinyalidir. Ağrı hissediyorsanız hareketi bırakın ve doktora danışın.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-section">
+            <h2 class="section-title">Beklenen Sonuçlar (12 Hafta)</h2>
+            <p class="section-subtitle">Düzenli antrenman ve doğru beslenme ile elde edebileceğiniz kazanımlar</p>
+
+            <div class="results-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1-4</div>
+                    <div class="timeline-content">
+                        <h4>Hafta 1-4: Adaptasyon Dönemi</h4>
+                        <p><strong>Fiziksel:</strong> Ağırlıklar hafif gelebilir ama kas ağrısı olacak. Bu normaldir. Vücut egzersize alışıyor.<br>
+                        <strong>Mental:</strong> Enerji seviyenizde artış, daha iyi uyku kalitesi.<br>
+                        <strong>Görsel:</strong> Henüz görsel değişim olmayabilir ama postürünüz düzelmeye başlar.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">5-8</div>
+                    <div class="timeline-content">
+                        <h4>Hafta 5-8: Kuvvet Artışı</h4>
+                        <p><strong>Fiziksel:</strong> Kaldırdığınız ağırlıklar artmaya başlar. Kaslarınızda sertleşme hissedersiniz.<br>
+                        <strong>Mental:</strong> Antrenman rutini oturtuldu, motivasyon yüksek.<br>
+                        <strong>Görsel:</strong> Kollarınızda, göğsünüzde ve bacaklarınızda hafif şişme ve definasyon başlar.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">9-12</div>
+                    <div class="timeline-content">
+                        <h4>Hafta 9-12: Görünür Değişim</h4>
+                        <p><strong>Fiziksel:</strong> Başlangıca göre %30-50 daha fazla ağırlık kaldırabiliyorsunuz. Dayanıklılık arttı.<br>
+                        <strong>Mental:</strong> Kendinize olan güven arttı, yaşam kaliteniz yükseldi.<br>
+                        <strong>Görsel:</strong> 2-4 kg kas kütlesi kazandınız, vücut yağınız azaldı. Arkadaşlarınız farkı soracak!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="text-align: center; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));">
+            <h2 style="margin-bottom: 15px;">Başarılar Dileriz!</h2>
+            <p style="font-size: 1.1em; color: var(--gray-700); line-height: 1.8;">
+                Bu program, sabır ve disiplin gerektirir. Her antrenmanın ardından daha güçlü olacaksınız.
+                <br><strong>Unutmayın:</strong> En iyi antrenman programı, düzenli yaptığınız programdır.
+                <br>Kendinize inanın ve yolculuğun tadını çıkarın!
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const elements = document.querySelectorAll('.stats-dashboard, .section, .tips-section, .results-section');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('animate-in');
+                        }, index * 100);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            elements.forEach(el => {
+                el.style.opacity = '0';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
